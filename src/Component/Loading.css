@@ -1,0 +1,23 @@
+/* LoadingState.css */
+
+.loading-state {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  transition: height 0.5s ease-out;
+}
+
+.loading-state.show-content {
+  height: auto;
+}
+
+.content {
+  opacity: 1;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.loading-state.show-content .content {
+  opacity: 1;
+  transform: translateY(0);
+}
