@@ -20,11 +20,12 @@ display: flex;
  justify-content:center;
 
  button{
-  background:lightgreen;
+  background:goldenrod;
   border:none;
-  padding:5px 8px;
+  padding:8px 8px;
   border-radius:6px;
   cursor:pointer;
+  text-transform:capitalize;
   
  }
 
