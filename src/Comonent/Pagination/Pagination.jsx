@@ -15,15 +15,32 @@ const Pagination = ({
   }
 
   const PaginationContainer = styled.div`
-   background-color:red
    display:flex;
    justify-content:center;
-   padding:0 2%;
+   margin-top:20px;
+   ul{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    
+   }
+   ul li{
+   list-style-type: none;
+   padding:15px;
+   background-color:black;
+    border-radius:6px;
+    
+   }
+   ul li a{
+    color:white;
+    text-decoration:none;
+   }
 
-  ` 
+
+  `; 
 
   return (
-    <PaginationContainer className="">
+    <PaginationContainer>
       <ul className="pagination">
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">

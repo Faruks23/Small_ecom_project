@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Product from "../Product/Product";
-import Pagination from "../Pagination/Pagination"
-
+import Pagination from "../Pagination/Pagination";
 
 const ProductListContainer = styled.div`
   display: flex;
@@ -19,16 +18,11 @@ const FilterSortContainer = styled.div`
 `;
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 6; // Number of products per page
-
-
-
+  const productsPerPage = 8; // Number of products per page
 
   useEffect(() => {
-  
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
@@ -36,40 +30,36 @@ const ProductList = () => {
       });
   }, []);
 
-console.log(products);
+  console.log(products);
 
-
-
-
- const handleSort = (e) => {
-   const newSortOrder = e.target.value;
-   setSortOrder(newSortOrder);
-   sortProducts(newSortOrder);
- };
-
-const sortProducts = (order) => {
-  const sortedProducts = [...products];
-
-  if (order === "asc") {
-    sortedProducts.sort((a, b) => a.price - b.price);
-  } else if (order === "desc") {
-    sortedProducts.sort((a, b) => b.price - a.price);
-  }
-
-  setProducts(sortedProducts); // Update the filteredProducts state
-};
-
-  const handleFilter = () => {
-    // Implement filtering logic based on user inputs
+  const handleSort = (e) => {
+    const newSortOrder = e.target.value;
+    setSortOrder(newSortOrder);
+    sortProducts(newSortOrder);
   };
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const sortProducts = (order) => {
+    const sortedProducts = [...products];
+
+    if (order === "asc") {
+      sortedProducts.sort((a, b) => a.price - b.price);
+    } else if (order === "desc") {
+      sortedProducts.sort((a, b) => b.price - a.price);
+    }
+
+    setProducts(sortedProducts); // Update the filteredProducts state
   };
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+   const indexOfLastProduct = currentPage * productsPerPage;
+   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+   const currentProducts = products.slice(
+     indexOfFirstProduct,
+     indexOfLastProduct
+   );
+
+   const paginate = (pageNumber) => {
+     setCurrentPage(pageNumber);
+   };
 
   return (
     <div>
@@ -87,18 +77,14 @@ const sortProducts = (order) => {
         </div>
       </FilterSortContainer>
       <ProductListContainer>
-        {products.map((product) => (
-          <Product key={product.id} product={product} />
-        ))}
-      </ProductListContainer>
-      <ProductListContainer>
         {currentProducts.map((product) => (
           <Product key={product.id} product={product} />
         ))}
       </ProductListContainer>
+
       <Pagination
         productsPerPage={productsPerPage}
-        totalProducts={filteredProducts.length}
+        totalProducts={products.length}
         paginate={paginate}
         currentPage={currentPage}
       />

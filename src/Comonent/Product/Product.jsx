@@ -7,14 +7,12 @@ const ProductItem = styled.div`
   padding: 10px;
   margin: 10px;
   width: 100%;
-  max-width:300px;
-  img{
+  max-width: 300px;
+  img {
     width: 100%;
     height: 100%;
-    max-height:300px;
-    
+    max-height: 300px;
   }
-
 `;
 
 const AddButton = styled.div`
@@ -34,14 +32,15 @@ display: flex;
 
 const Product = ({product}) => {
   return (
-    <ProductItem>
-      <img  src={product.image} alt={product.title} />
-      <h3>{product.title}</h3>
-      <p>{product.description.slice(0,50)}...Read More</p>
+    <ProductItem className='g1'>
+      <img src={product.image} alt={product.title} />
+      <h4>{product.title}</h4>
+      <p>{product.description.slice(0, 50)}...Read More</p>
       <p>${product.price}</p>
       <AddButton>
         <button>Add to cart</button>
       </AddButton>
+
     </ProductItem>
   );
 };
